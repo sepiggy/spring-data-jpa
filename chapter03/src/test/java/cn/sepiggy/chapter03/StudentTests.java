@@ -32,4 +32,10 @@ public class StudentTests {
         val studentList = studentRepository.findStudentsByNameAndAddress("李", "长春");
         studentList.forEach(System.out::println);
     }
+
+    @Test
+    void test4() {
+        val studentList = studentRepository.findStudentsByNameAndAddress("李", "长春");
+        studentList.forEach(System.out::println);
+    }
 }
