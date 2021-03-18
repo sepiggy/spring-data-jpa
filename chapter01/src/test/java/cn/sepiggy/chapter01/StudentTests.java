@@ -11,7 +11,7 @@ import org.springframework.data.domain.Sort;
 import javax.annotation.Resource;
 
 @SpringBootTest
-public class StuTest {
+public class StudentTests {
 
     @Resource
     private StudentRepository studentRepository;
