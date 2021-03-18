@@ -2,6 +2,7 @@ package cn.sepiggy.chapter03.dao;
 
 import cn.sepiggy.chapter03.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -27,4 +28,14 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     // 通过命名参数绑定
     @Query("from Student where name like %:name% and address like %:address%")
     List<Student> findStudentsParam(@Param("name") String studentName, @Param("address") String address);
+
+    // @Modifying注解标记该方法是一个修改方法
+    @Modifying
+    @Query("update Student set name = :name where id = :id")
+    int updateStudent(@Param("name") String studentName, @Param("id") Integer id);
+
+    // 删除
+    @Modifying
+    @Query("delete from Student where id = :id")
+    int deleteStudent(@Param("id") Integer id);
 }

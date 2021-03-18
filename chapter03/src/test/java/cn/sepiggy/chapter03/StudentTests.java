@@ -4,6 +4,8 @@ import cn.sepiggy.chapter03.dao.StudentRepository;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -37,5 +39,22 @@ public class StudentTests {
     void test4() {
         val studentList = studentRepository.findStudentsByNameAndAddress("李", "长春");
         studentList.forEach(System.out::println);
+    }
+
+    // 执行update / delete查询方法需要开启事务
+    @Transactional
+    // 禁止自动回滚事务
+    // @Rollback(false)
+    @Commit
+    @Test
+    void test5() {
+        studentRepository.updateStudent("张大大", 2);
+    }
+
+    @Transactional
+    @Commit
+    @Test
+    void test6() {
+        studentRepository.deleteStudent(10);
     }
 }
